@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import axios from 'axios';
+import AlbumDetail from './AlbumDetail';
 
 // const AlbumList = () => {
 //   return (
@@ -11,18 +12,24 @@ import axios from 'axios';
 // };
 
 class AlbumList extends Component {
+  state = { albums: [] };
+
   componentWillMount(){
     var request = axios.get("https://rallycoding.herokuapp.com/api/music_albums")
-    request.then(response => console.log(response.data[0]));
+    request.then(response => this.setState( { albums: response.data }));
+  }
 
-    // console.log("Component will mount in album list");
-    // debugger;
+  renderAlbums() {
+    return this.state.albums.map((album) =>
+      <AlbumDetail key={album.title} album={album} />);
   }
 
   render() {
+    console.log(this.state);
+
     return (
     <View>
-      <Text>Album List</Text>
+      {this.renderAlbums()}
     </View>
     );
   };
