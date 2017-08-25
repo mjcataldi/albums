@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
+import Linking, {  url } from 'react-native';
 
 
 const AlbumDetail = (props) => {
@@ -25,9 +26,9 @@ const AlbumDetail = (props) => {
 						source={ { uri: thumbnail_image } } />
 				</View>
 
-    		<View style={ headerTextStyle }>
-      		<Text>{props.album.title}</Text>
-      	</View>
+				<View style={ headerTextStyle }>
+		  		<Text>{props.album.title}</Text>
+	      </View>
     	</CardSection>
 
     	<CardSection>
@@ -35,7 +36,7 @@ const AlbumDetail = (props) => {
     	</CardSection>
 
     	<CardSection>
-    		<Button />
+    		<Button onPress={ () => Linking.openURL(url) }>Buy Me</Button>
     	</CardSection>
     </Card>
   	);
